@@ -60,7 +60,7 @@ const HelloWorldSceneAR = () => {
     );
   };
   */
-
+const text = 'Hi Yanxia!';
   return (
     <ViroARScene onTrackingUpdated={onInitialized}>
       <ViroAmbientLight color={'#aaaaaa'} />

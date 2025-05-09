@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@viro-community/react-viro": "^2.20.2",
+    "jetifier": "^2.0.0",
     "react": "17.0.2",
     "react-native": "0.65.1"
   },
@@ -19,8 +20,9 @@
     "@babel/runtime": "^7.15.3",
     "@react-native-community/eslint-config": "^3.0.0",
     "babel-jest": "^27.0.6",
-    "eslint": "^7.32.0",
+    "eslint": "^8.57.1",
     "jest": "^27.0.6",
+    "metro": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-codegen": "^0.0.7",
     "react-test-renderer": "17.0.2"
