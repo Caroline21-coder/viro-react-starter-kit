@@ -64,12 +64,16 @@ const text = 'Hi Yanxia!';
   return (
     <ViroARScene onTrackingUpdated={onInitialized}>
       <ViroAmbientLight color={'#aaaaaa'} />
-      <ViroText
-        text={text}
-        scale={[0.5, 0.5, 0.5]}
-        position={[0, 0, -1]}
-        style={styles.helloWorldTextStyle}
-      />
+        <Viro3DObject
+      source={objects_3D.pug_animated.obj}
+      type={objects_3D.pug_animated.type}
+      position={objects_3D.pug_animated.position}
+      scale={objects_3D.pug_animated.scale}
+      rotation={[0, 0, 0]}
+      animation={{...objects_3D.pug_animated.animation, run: true}}
+      dragType="FixedToWorld"
+      onDrag={() => {}}
+    />
     </ViroARScene>
   );
 };
