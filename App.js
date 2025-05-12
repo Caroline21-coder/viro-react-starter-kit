@@ -10,6 +10,7 @@ import {
   Viro360Image,
   ViroARTrackingTargets,
   ViroARImageMarker,
+  ViroDirectionalLight
 } from '@viro-community/react-viro';
 import {objects_3D} from './viroRes/resources';
 
@@ -64,13 +65,15 @@ const text = 'Hi Yanxia!';
   return (
     <ViroARScene onTrackingUpdated={onInitialized}>
   <ViroAmbientLight color={'#aaaaaa'} />
+  
 
       <Viro3DObject
-  source={require('./viroRes/angel.glb')}
-  position={[0, 0, 0]}
+  source={require('./viroRes/maple_tree.glb')}
+  position={[0, 0, -0.5]}
   scale={[0.1, 0.1, 0.1]}
   type="GLB" // or "GLTF" for gITF files
 />
+
 </ViroARScene>
     
   );
