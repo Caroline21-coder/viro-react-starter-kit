@@ -51,4 +51,7 @@ export const objects_3D = {
   diving_360: {
     background: require('./360_diving.jpg'),
   },
+  panorama: {
+    background: require('./panorama.jpg')
+  }
 };

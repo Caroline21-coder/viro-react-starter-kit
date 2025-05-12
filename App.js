@@ -63,18 +63,16 @@ const HelloWorldSceneAR = () => {
 const text = 'Hi Yanxia!';
   return (
     <ViroARScene onTrackingUpdated={onInitialized}>
-      <ViroAmbientLight color={'#aaaaaa'} />
-        <Viro3DObject
-      source={objects_3D.pug_animated.obj}
-      type={objects_3D.pug_animated.type}
-      position={objects_3D.pug_animated.position}
-      scale={objects_3D.pug_animated.scale}
-      rotation={[0, 0, 0]}
-      animation={{...objects_3D.pug_animated.animation, run: true}}
-      dragType="FixedToWorld"
-      onDrag={() => {}}
-    />
-    </ViroARScene>
+  <ViroAmbientLight color={'#aaaaaa'} />
+
+      <Viro3DObject
+  source={require('./viroRes/angel.glb')}
+  position={[0, 0, 0]}
+  scale={[0.1, 0.1, 0.1]}
+  type="GLB" // or "GLTF" for gITF files
+/>
+</ViroARScene>
+    
   );
 };
 
@@ -94,7 +92,7 @@ ViroARTrackingTargets.createTargets({
   pug2D_img: {
     source: objects_3D.pug_animated.img,
     orientation: 'Up',
-    physicalWidth: 0.12, // real world width in meters
+    physicalWidth: 0.38, // real world width in meters
   },
 });
 
