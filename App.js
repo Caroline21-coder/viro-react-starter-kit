@@ -68,9 +68,9 @@ const text = 'Hi Yanxia!';
   
 
       <Viro3DObject
-  source={require('./viroRes/nice_tree.glb')}
+  source={require('./viroRes/sunflower.glb')}
   position={[0, 0, -0.5]}
-  scale={[0.1, 0.1, 0.1]}
+  scale={[0.001, 0.001, 0.001]}
   type="GLB" // or "GLTF" for gITF files
 />
 
