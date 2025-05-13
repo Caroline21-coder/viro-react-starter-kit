@@ -67,7 +67,7 @@ const HelloWorldSceneAR = () => {
   };
   */
 const moveObject = (newPosition) => {
-  console.log(newPosition);
+  setPosition(newPosition);
 
 }
 
