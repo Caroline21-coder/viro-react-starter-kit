@@ -19,6 +19,7 @@ import {objects_3D} from './viroRes/resources';
 const HelloWorldSceneAR = () => {
 
   const [position,setPosition]= useState([0,0,-0.5]);
+  const [scale,setScale]= useState([0.1,0.1,0.1]);
 
   function onInitialized(state, reason) {
     if (state === ViroTrackingStateConstants.TRACKING_NORMAL) {
@@ -71,6 +72,16 @@ const moveObject = (newPosition) => {
 
 }
 
+const scaleObject = (pinchState, scaleFactor, source) => {
+  if (pinchState === 3) {
+  let currentScale = scale [0];
+  let newScale = currentScale * scaleFactor;
+  let newScaleArray = [newScale, newScale, newScale];
+
+  setScale(newScaleArray);
+  }
+}
+
 
 
 const text = 'Hi Yanxia!';
@@ -80,9 +91,10 @@ const text = 'Hi Yanxia!';
    <Viro3DObject
       source={require('./viroRes/nice_tree.glb')}
       position={position}
-      scale={[0.1, 0.1, 0.1]}
+      scale={scale}
       type="GLB"
       onDrag={moveObject}
+      onPinch={scaleObject}
     />
 </ViroARScene>
   );
