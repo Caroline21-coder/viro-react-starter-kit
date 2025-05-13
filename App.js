@@ -66,6 +66,13 @@ const HelloWorldSceneAR = () => {
     );
   };
   */
+const moveObject = (newPosition) => {
+  console.log(newPosition);
+
+}
+
+
+
 const text = 'Hi Yanxia!';
   return (
     <ViroARScene onTrackingUpdated={onInitialized}>
@@ -75,6 +82,7 @@ const text = 'Hi Yanxia!';
       position={position}
       scale={[0.1, 0.1, 0.1]}
       type="GLB"
+      onDrag={moveObject}
     />
 </ViroARScene>
   );
