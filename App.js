@@ -14,7 +14,12 @@ import {
 } from '@viro-community/react-viro';
 import {objects_3D} from './viroRes/resources';
 
+
+
 const HelloWorldSceneAR = () => {
+
+  const [position,setPosition]= useState([0,0,-0.5]);
+
   function onInitialized(state, reason) {
     if (state === ViroTrackingStateConstants.TRACKING_NORMAL) {
     } else if (state === ViroTrackingStateConstants.TRACKING_UNAVAILABLE) {
@@ -65,17 +70,13 @@ const text = 'Hi Yanxia!';
   return (
     <ViroARScene onTrackingUpdated={onInitialized}>
   <ViroAmbientLight color={'#aaaaaa'} />
-  
-
-      <Viro3DObject
-  source={require('./viroRes/nice_tree.glb')}
-  position={[0, 0, -0.5]}
-  scale={[0.1, 0.1, 0.1]}
-  type="GLB" 
-/>
-
+   <Viro3DObject
+      source={require('./viroRes/nice_tree.glb')}
+      position={position}
+      scale={[0.1, 0.1, 0.1]}
+      type="GLB"
+    />
 </ViroARScene>
-    
   );
 };
 

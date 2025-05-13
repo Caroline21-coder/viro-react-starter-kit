@@ -53,5 +53,11 @@ export const objects_3D = {
   },
   panorama: {
     background: require('./panorama.jpg')
+  },
+  grass: {
+    background: require('./grass.jpg'),
+  },
+  lab: {
+    background: require('./lab.jpg'),
   }
 };
