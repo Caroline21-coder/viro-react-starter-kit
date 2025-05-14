@@ -20,6 +20,7 @@ const HelloWorldSceneAR = () => {
 
   const [position,setPosition]= useState([0,0,-0.5]);
   const [scale,setScale]= useState([0.1,0.1,0.1]);
+  const [rotation,setRotation]= useState([0,0,0]);
 
   function onInitialized(state, reason) {
     if (state === ViroTrackingStateConstants.TRACKING_NORMAL) {
@@ -69,8 +70,15 @@ const HelloWorldSceneAR = () => {
   */
 const moveObject = (newPosition) => {
   setPosition(newPosition);
-
 }
+
+const rotateObject = (rotateState, rotationFactor, source) => {
+  if (rotateState === 3) {
+    let currentRotation = [rotation[0] - rotationFactor, rotation[1] - rotationFactor, rotation[2] - rotationFactor];
+  
+    setRotation(currentRotation);
+  }
+};
 
 const scaleObject = (pinchState, scaleFactor, source) => {
   if (pinchState === 3) {
@@ -92,9 +100,11 @@ const text = 'Hi Yanxia!';
       source={require('./viroRes/nice_tree.glb')}
       position={position}
       scale={scale}
+      rotation={rotation}
       type="GLB"
       onDrag={moveObject}
       onPinch={scaleObject}
+      onRotate={rotateObject}
     />
 </ViroARScene>
   );
