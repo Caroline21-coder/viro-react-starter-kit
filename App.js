@@ -10,7 +10,8 @@ import {
   Viro360Image,
   ViroARTrackingTargets,
   ViroARImageMarker,
-  ViroDirectionalLight
+  ViroDirectionalLight,
+  ViroARPlaneSelector,
 } from '@viro-community/react-viro';
 import {objects_3D} from './viroRes/resources';
 
@@ -96,6 +97,7 @@ const text = 'Hi Yanxia!';
   return (
     <ViroARScene onTrackingUpdated={onInitialized}>
   <ViroAmbientLight color={'#aaaaaa'} />
+  <ViroARPlaneSelector/>
    <Viro3DObject
       source={require('./viroRes/nice_tree.glb')}
       position={position}
@@ -106,6 +108,7 @@ const text = 'Hi Yanxia!';
       onPinch={scaleObject}
       onRotate={rotateObject}
     />
+  
 </ViroARScene>
   );
 };
