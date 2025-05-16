@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Touchable} from 'react-native';
 import {
   ViroARScene,
   ViroText,
@@ -17,10 +17,12 @@ import {objects_3D} from './viroRes/resources';
 
 
 
-const HelloWorldSceneAR = () => {
+const HelloWorldSceneAR = (props) => {
+  let data= props.sceneNavigator.viroAppProps;
 
-  const [position,setPosition]= useState([0,0,-0.5]);
+  const [position, setPosition]= useState([0,0,-0.5]);
   const [scale,setScale]= useState([0.1,0.1,0.1]);
+  const[scaleSunflower, setScaleSunflower]= useState([0.001,0.001,0.001]);
   const [rotation,setRotation]= useState([0,0,0]);
 
   function onInitialized(state, reason) {
@@ -69,7 +71,9 @@ const HelloWorldSceneAR = () => {
     );
   };
   */
-
+const moveObject = (newPosition) => {
+  setPosition(newPosition);
+}
 
 const rotateObject = (rotateState, rotationFactor, source) => {
   if (rotateState === 3) {
@@ -89,45 +93,76 @@ const scaleObject = (pinchState, scaleFactor, source) => {
   }
 }
 
+const handleScaleSunflower = (pinchState, scaleFactor, source) => {
+  if (pinchState === 3) {
+  let currentScale = scaleSunflower [0];
+  let newScale = currentScale * scaleFactor;
+  let newScaleArray = [newScale, newScale, newScale];
+
+  setScaleSunflower(newScaleArray);
+  }
+}
+
+
 
 
 const text = 'Hi Yanxia!';
   return (
     <ViroARScene onTrackingUpdated={onInitialized}>
-  <ViroAmbientLight color={'#aaaaaa'} />
-  <ViroARPlaneSelector/>
-   <Viro3DObject
+    <ViroAmbientLight color={'#aaaaaa'} />
+
+    {data.object === "tree"? 
+    <Viro3DObject
       source={require('./viroRes/nice_tree.glb')}
-      position={[0, 0, -2]}
+      position={position}
       scale={scale}
       rotation={rotation}
       type="GLB"
-      dragType="FixedToPlane"
-      dragPlane={{
-        planePoint: [0,0,0],
-        planeNormal: [0, 1, 0],
-        maxDistance: 10
-      }}
-      onDrag= {(newPosition) => {
-        setPosition(newPosition);
-      }}
+      onDrag={moveObject}
       onPinch={scaleObject}
       onRotate={rotateObject}
     />
-  
-</ViroARScene>
+   : 
+   <Viro3DObject
+      source={require('./viroRes/sunflower.glb')}
+      position={position}
+      scale={scaleSunflower}
+      rotation={rotation}
+      type="GLB"
+      onDrag={moveObject}
+      onPinch={handleScaleSunflower}
+      onRotate={rotateObject}
+    />
+    }
+    
+    </ViroARScene>
   );
 };
 
 export default () => {
+  const [object, setObject]= useState('tree');
   return (
+    <View style={styles.mainView}>
     <ViroARSceneNavigator
       autofocus={true}
       initialScene={{
         scene: HelloWorldSceneAR,
       }}
+      viroAppProps={{"object": object}} 
       style={styles.f1}
     />
+    <View style={styles.controlsView}>
+      <TouchableOpacity onPress={()=> setObject('tree')}>
+        <Text style={styles.text}> Display tree
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=> setObject('sunflower')}>
+        <Text style={styles.text}> Display sunflower
+        </Text> 
+      </TouchableOpacity>
+
+    </View>
+    </View>
   );
 };
 
@@ -140,6 +175,17 @@ ViroARTrackingTargets.createTargets({
 });
 
 var styles = StyleSheet.create({
+  mainView: {
+    flex:1
+  },
+  controlsView: {
+    width: '100%',
+    height: 100,
+    backgroundColor: '#ffffff', 
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   f1: {flex: 1},
   helloWorldTextStyle: {
     fontFamily: 'Arial',
@@ -148,4 +194,10 @@ var styles = StyleSheet.create({
     textAlignVertical: 'center',
     textAlign: 'center',
   },
+  text: {
+    margin: 50,
+    backgroundColor: '#9d9d9d',
+    padding: 10,
+    fontWeight: 'bold'
+  }
 });
