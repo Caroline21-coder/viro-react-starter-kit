@@ -69,9 +69,7 @@ const HelloWorldSceneAR = () => {
     );
   };
   */
-const moveObject = (newPosition) => {
-  setPosition(newPosition);
-}
+
 
 const rotateObject = (rotateState, rotationFactor, source) => {
   if (rotateState === 3) {
@@ -100,11 +98,19 @@ const text = 'Hi Yanxia!';
   <ViroARPlaneSelector/>
    <Viro3DObject
       source={require('./viroRes/nice_tree.glb')}
-      position={position}
+      position={[0, 0, -2]}
       scale={scale}
       rotation={rotation}
       type="GLB"
-      onDrag={moveObject}
+      dragType="FixedToPlane"
+      dragPlane={{
+        planePoint: [0,0,0],
+        planeNormal: [0, 1, 0],
+        maxDistance: 10
+      }}
+      onDrag= {(newPosition) => {
+        setPosition(newPosition);
+      }}
       onPinch={scaleObject}
       onRotate={rotateObject}
     />
